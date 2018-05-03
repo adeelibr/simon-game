@@ -1,0 +1,75 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #607D8B;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.margin-top {
+  margin-top: 40px;
+}
+
+.board {
+  background-color: floralwhite;
+  height: 400px;
+  width: 400px;
+  border: 20px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.pad {
+  box-sizing: border-box;
+  float: left;
+  height: 200px;
+  width: 200px;
+  border: 0;
+  cursor: pointer;
+  transition: border 4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.pad:hover {
+  background-color: #fff;
+  filter: blur(15px);
+  border: 10px solid #000;
+}
+
+.red {
+  background-color: #f44336;
+  border-radius: 100% 0 0 0;
+}
+.red-active {
+  background-color: darkred !important;
+}
+
+.green {
+  background-color: #4CAF50;
+  border-radius: 0 100% 0 0;
+}
+.green-active {
+  background-color: darkgreen !important;
+}
+
+.blue {
+  background-color: #2196F3;
+  border-radius: 0 0 0 100%;
+}
+.blue-active {
+  background-color: darkblue !important;
+}
+
+.yellow {
+  background-color: #FFEB3B;
+  border-radius: 0 0 100% 0;
+}
+.yellow-active {
+  background-color: #e6d47e !important;
+}
+/*
+ * Animations 
+ */
+
+/* TODO: SPIN Animation */
+/* TODO: Background Animation */
