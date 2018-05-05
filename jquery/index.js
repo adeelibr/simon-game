@@ -1,5 +1,5 @@
 let userSequence = [];
-let botSequence = [0, 1, 2, 3];
+let botSequence = [];
 
 let currentLevel = 0;
 
