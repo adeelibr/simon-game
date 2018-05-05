@@ -1,22 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Gothic+A1');
+
+:root {
+  --primary-font-color: #fff;
+  --background: #540032;
+
+  --board-height: 400px; 
+  --board-width: 400px;
+  --board-border-width: 20px;
+
+  --pad-height: 200px;
+  --pad-width: 200px;
+
+  --margin: 20px;
+}
+
 body {
+  height: 100vh;
   padding: 0;
   margin: 0;
-  background-color: #607D8B;
+
+  color: var(--primary-font-color);
+  background-color: var(--background);
+
+  font-family: 'Gothic A1', sans-serif;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+  justify-content: center;
 
-.margin-top {
-  margin-top: 40px;
+
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  background-size: 400% 400%;
+  animation: backgroung-gradient 15s ease infinite;
 }
 
 .board {
   background-color: floralwhite;
-  height: 400px;
-  width: 400px;
-  border: 20px solid #fff;
+  height: var(--board-height);
+  width: var(--board-width);
+  border: var(--board-border-width) solid #fff;
+  margin: var(--margin);
   border-radius: 50%;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
@@ -24,16 +48,13 @@ body {
 .pad {
   box-sizing: border-box;
   float: left;
-  height: 200px;
-  width: 200px;
+  height: var(--pad-height);
+  width: var(--pad-width);
   border: 0;
   cursor: pointer;
-  transition: border 4s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .pad:hover {
-  background-color: #fff;
-  filter: blur(15px);
-  border: 10px solid #000;
+  opacity: .95;
 }
 
 .red {
@@ -67,9 +88,60 @@ body {
 .yellow-active {
   background-color: #e6d47e !important;
 }
-/*
- * Animations 
- */
 
-/* TODO: SPIN Animation */
-/* TODO: Background Animation */
+.info-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.info-box h3 {
+  text-transform: uppercase;
+  text-align: center;
+  margin: var(--margin);
+  font-size: 21px;
+  min-width: 200px;
+}
+.info-box h3 span {
+  color: #fff;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: var(--margin);
+}
+button {
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #000;
+  border: 2px solid #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+
+  padding: 12px 60px;
+  margin: 0 15px;
+  cursor: pointer;
+
+  transition: all 200ms ease-in;
+}
+button:hover {
+  outline: 0;
+  background-color: #fff;
+}
+button:focus {
+  outline: 0;
+}
+
+
+@keyframes backgroung-gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}

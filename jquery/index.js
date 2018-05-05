@@ -13,9 +13,14 @@ const BOARD_SOUNDS = [
 
 $('document').ready(() => {
 
+  // $('.pad').removeEventListener('click', onAddUserClick, false)
+
   $('#start').click(() => {
-    onResetGame();
+    userSequence = [];
+    botSequence = [];
+    currentLevel = 0;
     currentLevel++;
+    onDisplayGameStatus('Started');
     onStartSimonSequence();
   });
 
@@ -23,15 +28,30 @@ $('document').ready(() => {
     onResetGame();
   });
 
-  $('.pad').click(function() {
-    const id    = parseInt($(this).attr('id'));
-    const color = $(this).attr('class').split(' ')[1];
-    onStartUserSequence(id, color);
-  });
+  // $('.pad').click(function() {
+  //   const id    = parseInt($(this).attr('id'));
+  //   const color = $(this).attr('class').split(' ')[1];
+  //   onStartUserSequence(id, color);
+  // });
+
 });
 
+function onAddUserClick (isClickable=true) {
+  if (isClickable) {
+    onDisplayTurn('Your turn')
+    $('.pad').click(function () {
+      const id = parseInt($(this).attr('id'));
+      const color = $(this).attr('class').split(' ')[1];
+      onStartUserSequence(id, color);
+    });
+  } else {
+    onDisplayTurn('Bot turn')
+    $('.pad').off('click');
+  }
+}
+
 function onStartSimonSequence () {
-  $('.display span').text(currentLevel);
+  onDisplayLevel(currentLevel);
   getRandomNumber();
   let i = 0;
   let interval = setInterval(() => {
@@ -45,6 +65,7 @@ function onStartSimonSequence () {
     i++;
     if (i === botSequence.length) {
       clearInterval(interval);
+      onAddUserClick(true);
     } 
   }, 1000);
 }
@@ -63,15 +84,17 @@ function onStartUserSequence (id, color) {
 
   if (!checkUserSequence) {
     // console.log('Error, DO SOMETHING');
+    onDisplayGameStatus('You lost.');
     onResetGame();
   } else if (userSequence.length === botSequence.length && userSequence.length < NO_OF_LEVELS) {
     // console.log('Upgrading Level');
     currentLevel++;
     userSequence = [];
+    onAddUserClick(false);
     onStartSimonSequence();
   } else if (userSequence.length === NO_OF_LEVELS) {
     // console.log('Deciding Winner');
-    onDisplayWinner();
+    onDisplayGameStatus('You won.');
     onResetGame();
   }
 }
@@ -97,9 +120,23 @@ function onResetGame () {
   userSequence = [];
   botSequence = [];
   currentLevel = 0;
+  
+  setTimeout(() => {
+    onAddUserClick(false);
+    onDisplayLevel(currentLevel);
+    onDisplayGameStatus('--');
+    onDisplayTurn('--')
+  }, 1500);
+}
+
+function onDisplayGameStatus (msg) {
+  $('.status span').text(msg);
+}
+
+function onDisplayLevel (level) {
   $('.display span').text(currentLevel);
 }
 
-function onDisplayWinner () {
-  $('.result').text('Winner');
+function onDisplayTurn (turn) {
+  $('.player-turn span').text(turn);
 }
