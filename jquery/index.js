@@ -134,7 +134,7 @@ function onDisplayGameStatus (msg) {
 }
 
 function onDisplayLevel (level) {
-  $('.display span').text(currentLevel);
+  $('.display span').text(level);
 }
 
 function onDisplayTurn (turn) {
